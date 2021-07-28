@@ -30,7 +30,9 @@ pillColor = (222, 161, 133)
 
 
 def moveCheck(row, col):
-    if gameBoard[row][col] != 0:
+    if col == -1 or col == len(gameBoard[0]):  # if final index (works w/ letting pacman teleport to other side)
+        return True
+    if gameBoard[row][col] != 0:  # if pill spot/not a wall
         return True
     else:
         return False
@@ -84,5 +86,5 @@ while running:
             if moveCheck(pacman[0], pacman[1] - 1):
                 pacman[1] -= 1
 
-    pacman[1] %= len(gameBoard[0])
+    pacman[1] %= len(gameBoard[0])  # allows pacman to leave screen and return mirrored on other side
     makeBoard()
